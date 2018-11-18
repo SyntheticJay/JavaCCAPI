@@ -22,4 +22,7 @@ I still have `alot` to work on, and they are listed here:
 - Memory Editing
 - Shutdown Command (Not working? ZEROTICA!!)
 
-~ Jay
+Feel free to send a pull request, or an issue, and I'll work on it when I can.
+
+Discord: Jay L.#3668
+Twitter: @jaydeveloper_
