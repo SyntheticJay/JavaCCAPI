@@ -17,12 +17,13 @@ e.g.
 and the initial class (`me.jay.CCAPI`) is implemented from an interface called ICCAPI which holds the functions that can be used.
 So, if you want an easy way to look at the functions in store, take a look there, it's all commented aswell.
 
-I still have `alot` to work on, and they are listed here:
+I still have some features to work on, and they are listed here:
 
 - Memory Editing
 - Shutdown Command (Not working? ZEROTICA!!)
+- Replace ICCAPI with an abstract class, make life _more_ easier.
 
 Feel free to send a pull request, or an issue, and I'll work on it when I can.
 
 Discord: Jay L.#3668
-Twitter: @jaydeveloper_
+
