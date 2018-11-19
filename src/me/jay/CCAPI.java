@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 /**
  * @author Jay L, 2018
@@ -22,6 +23,11 @@ public class CCAPI implements ICCAPI {
      */
     private String ip;
     private boolean isConnected;
+
+    /**
+     * Logger
+     */
+    private Logger logger = Logger.getLogger("CCAPI");
 
     /**
      * Constructor
@@ -39,7 +45,7 @@ public class CCAPI implements ICCAPI {
     public boolean connect(String ip) {
         this.ip = ip;
         this.isConnected = true;
-        System.out.println("[PS3API] Connected! IP: " + ip);
+        logger.info("Connected! IP: " + ip);
         return true;
     }
 
@@ -58,7 +64,7 @@ public class CCAPI implements ICCAPI {
      */
     @Override
     public void ringBuzzer(BuzzerType type) {
-        System.out.println("Sending Buzz Request to " + ip + " with type " + type.toString());
+        logger.info("Sending Buzz Request to " + ip + " with type " + type.toString());
         sendCommand("ringbuzzer", false, "type=" + type.getCode());
     }
 
@@ -69,7 +75,7 @@ public class CCAPI implements ICCAPI {
      */
     @Override
     public void notify(String msg, NotifyIcon icon) {
-        System.out.println("Sending Notify request to " + ip + " with message " + msg + " and icon " + icon.toString());
+        logger.info("Sending Notify request to " + ip + " with message " + msg + " and icon " + icon.toString());
         sendCommand("notify", false, "id=" + icon.getCode(), "msg=" + msg);
     }
 
@@ -79,7 +85,7 @@ public class CCAPI implements ICCAPI {
      */
     @Override
     public void changeLEDColor(LEDColor color, LEDStatus status) {
-        System.out.println("Sending LED Colour Change to " + ip + " with color " + color.toString());
+        logger.info("Sending LED Colour Change to " + ip + " with color " + color.toString());
         sendCommand("setconsoleled", false, "color=" + color.getCode(), "status=" + status.getCode());
     }
 
@@ -89,7 +95,7 @@ public class CCAPI implements ICCAPI {
      */
     @Override
     public void setBootCID(String consoleid) {
-        System.out.println("Sending CID Change to " + ip + " with PSID " + consoleid);
+        logger.info("Sending CID Change to " + ip + " with PSID " + consoleid);
         sendCommand("setbootconsoleids", false, "type=" + IDTypes.IDPS.getCode(), "on=1", "id=" + consoleid);
     }
 
@@ -98,7 +104,7 @@ public class CCAPI implements ICCAPI {
      */
     @Override
     public void resetBootCID() {
-        System.out.println("Sending CID reset to ip " + ip);
+        logger.info("Sending CID reset to ip " + ip);
         sendCommand("setbootconsoleids", false, "type=" + IDTypes.IDPS.getCode(), "on=0", "id=NULL");
     }
 
@@ -108,7 +114,7 @@ public class CCAPI implements ICCAPI {
      */
     @Override
     public void setBootPSID(String psid) {
-        System.out.println("Sending PSID change to " + ip + " with PSID " + psid);
+        logger.info("Sending PSID change to " + ip + " with PSID " + psid);
         sendCommand("setbootconsoleids", false, "type=" + IDTypes.PSID.getCode(), "on=1", "id=" + psid);
     }
 
@@ -117,7 +123,7 @@ public class CCAPI implements ICCAPI {
      */
     @Override
     public void resetBootPSID() {
-        System.out.println("Resetting Boot PSID on ip " + ip);
+        logger.info("Resetting Boot PSID on ip " + ip);
         sendCommand("setbootconsoleids", false, "type=" + IDTypes.PSID.getCode(), "on=0", "id=NULL");
     }
 
@@ -170,9 +176,6 @@ public class CCAPI implements ICCAPI {
                         params.append(arg);
                     }
                 }
-                //output command
-                System.out.println("[PS3API] Sending Request " + command + " with arguments " + Arrays.asList(args));
-
                 //instantiate URL with command and arguments
                 url = new URL("http://" + ip + ":6333/ccapi/" + command + "?" + params.toString());
             }else{
