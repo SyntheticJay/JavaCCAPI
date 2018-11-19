@@ -152,8 +152,8 @@ public class CCAPI implements ICCAPI {
         try {
             //if argument's aren't empty
             if(args != null) {
-                //our StringBuffer for parameters
-                StringBuffer params = new StringBuffer();
+                //our string builder for parameters
+                StringBuilder params = new StringBuilder();
                 //our parameter count
                 int pCount = 0;
 
@@ -192,8 +192,8 @@ public class CCAPI implements ICCAPI {
             //define our reader to pass in the input stream from our url connection
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            //our string buffer which will hold the response sent by the PS3
-            StringBuffer response = new StringBuffer();
+            //our string builder which will hold the response sent by the PS3
+            StringBuilder response = new StringBuilder();
 
             //iterate through each line from the reader
             String line;
